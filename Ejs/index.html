@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Ejs练习</title>
+		<script src="js/ejs.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<!-- <p id="box"></p> -->
+		<!-- <p id="ip1"></p>
+		<p id="ip2"></p>
+		<p id="ip3"></p>
+		<p class="ip4"></p> -->
+		<p class="ip5"></p>
+	</body>
+	 <!-- 模版 -->
+	 <!-- 给script标签设置type="text/template"属性，
+		  标签里的内容不会被执行，也不会显示在页面上，
+		  但是可以在另外一个script里面通过获取插入到页面上。
+		  这样可以把大段的html和js进行分离。 -->
+	<script id="users" type="text/template">
+		<% if (names.length) { %>
+	        <ul style="list-style: none;">
+	            <% names.forEach(name => { %>
+	                <li><%= name%></li>
+	            <% }) %>
+	        </ul>
+	    <% } %>
+	</script>
+	<script type="text/javascript">
+		// ejs参数
+    // cache 缓存编译后的函数，需要提供 filename
+    // filename 被 cache 参数用做键值，同时也用于 include 语句
+    // context 函数执行时的上下文环境
+    // compileDebug 当为 false 时不编译调试语句
+    // client 返回独立的编译后的函数
+    // delimiter 放在角括号中的字符，用于标记标签的开与闭
+    // debug 将生成的函数体输出
+    // _with 是否使用 with() {} 结构。如果为 false，所有局部数据将存储在 locals 对象上。
+    // localsName 如果不使用 with ，localsName 将作为存储局部变量的对象的名称。默认名称是 locals
+    // rmWhitespace 删除所有可安全删除的空白字符，包括开始与结尾处的空格。对于所有标签来说，它提供了一个更安全版本的 -%> (在一行的中间并不会剔除标签后面的换行符)。
+    // escape 为 <%= 结构设置对应的转义（escape）函数。它被用于输出结果以及在生成的客户端函数中通过 .toString() 输出。(默认转义 XML)。
+
+		// ejs标签含义
+    // <% '脚本' 标签，用于流程控制，无输出。
+    // <%_ 删除其前面的空格符
+    // <%= 输出数据到模板（输出是转义 HTML 标签）
+    // <%- 输出非转义的数据到模板
+    // <%# 注释标签，不执行、不输出内容
+    // <%% 输出字符串 '<%'
+    // %> 一般结束标签
+    // -%> 删除紧随其后的换行符
+    // _%> 将结束标签后面的空格符删除
+		
+		
+			// render 渲染字符串
+			// compile 编译字符串到模版函数(需调用才能生效)
+		// var html = ejs.render('<%= "hello, world" %>','') // 直接输出html
+		// var template = ejs.compile('<%= 456 %>'); // 输出一个函数
+		// var result = template();
+		// * ➡️ *********** ByClassName是数组类型,所以需要以box[n]的形式来书写
+		// document.getElementsByClassName('ip4')[0].innerHTML = html;
+		// document.getElementById('ip1').innerHTML = html;
+		// document.getElementById('ip2').innerHTML = template;
+		// document.getElementById('ip3').innerHTML = result;
+		//   *****第一个个例
+		// var people = ['geddy', 'neil', 'alex'],
+		// html = ejs.render('<%= people.join(", "); %>', {people: people});
+		// var box = document.getElementById('box');
+		// box.innerHTML = html;
+		// 旁观者
+		// 深夜时刻,思想慢慢的回来了,想想一天发生了什么,感觉事情很多,又感觉什么都没发生过,日复一日的活着,
+		// 这样的生活是我想要的么,我想也许不是的，可这就是生活。所以每到夜晚时刻,我总是自己的旁观者,一天的演出结束，台下的观众就我一个，曲终人散,丢了魂魄,剩个皮囊,静静躺着.
+		// 还能怎么样呢,
+		var users = document.getElementById('users').innerHTML;
+		var namesArr = ['zhangsan', 'lisi', 'wangwu']; // 从接口中获取
+		var html = ejs.render(users, {names: namesArr});
+		document.getElementsByClassName('ip5')[0].innerHTML = html
+		
+	</script>
+</html>
